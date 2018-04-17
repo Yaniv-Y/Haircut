@@ -58,7 +58,7 @@
 //   db.run("UPDATE barbers SET fen = -1");
 //   });
 
-var sqlite3 = require('sqlite3').verbose();
+var sqlite3 = require('sqlite3').verbose();//
 var url = require('url');
 var http = require('http');
 http.createServer(function (req, res) {
