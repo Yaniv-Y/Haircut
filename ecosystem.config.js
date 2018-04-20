@@ -11,7 +11,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'git@github.com:Yaniv-Y/Haircut.git',
       path: '/home/ubuntu/Haircut',
-      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
+      'post-deploy': 'pm2 startOrRestart ~/Haircut/source/express.js'
     }
   }
 }

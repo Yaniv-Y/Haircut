@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 	var sql = "SELECT bs.address, bs.gvanim, bs.menHaircut, bs.fen, bs.name, loc.latitude, loc.longitude\
 		    FROM barbers as bs\
 		    JOIN locations as loc\
-		    ON bs.id = loc.barber";//
+		    ON bs.id = loc.barber";
 	db.all(sql, function(err, rows) {
 	  rows.forEach((row) => {
 	  	if (getDistance(row.latitude, query.latitude, row.longitude, query.longitude) / 1000 < 15)
