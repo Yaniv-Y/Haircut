@@ -16,7 +16,7 @@ con.connect(function(err) {
   	console.log("Connected!");
   	var a = [];
 	var sql = "SELECT * FROM Barbers.`Table`;"
-  	con.query(sql, function (err, result) {
+  	con.query(sql, function (err, result, fields) {
   	  if (err) throw err;
   	  console.log("Table created");
   	  result.forEach((row) => {
