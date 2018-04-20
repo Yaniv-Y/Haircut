@@ -14,27 +14,26 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   	if (err) throw err;
   	console.log("Connected!");
-  	var a = [];
-	var sql = "SELECT * FROM Barbers.`Table`;"
-  	con.query(sql, function (err, result, fields) {
-  	  if (err) throw err;
-  	  console.log("Table created");
-  	  result.forEach((row) => {
-	  	if (getDistance(row.latitude, query.latitude, row.longitude, query.longitude) / 1000 < 15)
-	  		a.push({address: row.address, gvanim: row.shades, menHaircut: row.menHaircut, fen: row.fen,
-	  				name: row.name, location: {latitude: row.latitude, longitude: row.longitude}});
-	  });
-	  // res.write(JSON.stringify(a));
-   //    res.end();
-  	});
+	app.get('/', (req, res) => {
+		res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+		var query = req.query
+		// checkVersion(query);
+	  	var a = [];
+		var sql = "SELECT * FROM Barbers.`Table`;"
+	  	con.query(sql, function (err, result, fields) {
+	  	  if (err) throw err;
+	  	  console.log("Table created");
+	  	  result.forEach((row) => {
+		  	if (getDistance(row.latitude, query.latitude, row.longitude, query.longitude) / 1000 < 15)
+		  		a.push({address: row.address, gvanim: row.shades, menHaircut: row.menHaircut, fen: row.fen,
+		  				name: row.name, location: {latitude: row.latitude, longitude: row.longitude}});
+		  });
+		  res.write(JSON.stringify(a));
+	      res.end();
+	  	});
+	})
+	app.listen(8080, () => console.log('Server running on port 8080'))
 });
-
-// app.get('/', (req, res) => {
-// 	res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-// 	var query = req.query
-// 	// checkVersion(query);
-// })
-// app.listen(8080, () => console.log('Server running on port 8080'))
 
 var checkVersion = function(query) {
 	if (query.v === "1.0") {
