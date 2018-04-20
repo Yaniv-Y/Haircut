@@ -1,29 +1,36 @@
 // var sqlite3 = require('sqlite3').verbose();
 const express = require('express')
 const app = express()
-app.get('/', (req, res) => {
-  res.send('HOY!') //
-	// res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-	// var query = req.query
-	// // checkVersion(query);
-	// var db = new sqlite3.Database('BarbersDB');
-	// var a = [];
-	// var sql = "SELECT bs.address, bs.gvanim, bs.menHaircut, bs.fen, bs.name, loc.latitude, loc.longitude\
-	// 	    FROM barbers as bs\
-	// 	    JOIN locations as loc\
-	// 	    ON bs.id = loc.barber";
-	// db.all(sql, function(err, rows) {
-	//   rows.forEach((row) => {
-	//   	if (getDistance(row.latitude, query.latitude, row.longitude, query.longitude) / 1000 < 15)
-	//   		a.push({address: row.address, gvanim: row.gvanim, menHaircut: row.menHaircut, fen: row.fen,
-	//   				name: row.name, location: {latitude: row.latitude, longitude: row.longitude}});
-	//   });
-	//   res.write(JSON.stringify(a));
- //      res.end();
-	// });
-	// db.close();
-})
-app.listen(8080, () => console.log('Server running on port 8080'))
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "Barbers"
+});
+
+con.connect(function(err) {
+  	if (err) throw err;
+  	console.log("Connected!");
+  	var a = [];
+	var sql = "SELECT bs.address, bs.gvanim, bs.menHaircut, bs.fen, bs.name, loc.latitude, loc.longitude\
+		    FROM barbers as bs\
+		    JOIN locations as loc\
+		    ON bs.id = loc.barber";
+  	con.query(sql, function (err, result) {
+  	  if (err) throw err;
+  	  console.log("Table created");
+  	});
+});
+
+// app.get('/', (req, res) => {
+// 	res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+// 	var query = req.query
+// 	// checkVersion(query);
+// })
+// app.listen(8080, () => console.log('Server running on port 8080'))
 
 var checkVersion = function(query) {
 	if (query.v === "1.0") {
