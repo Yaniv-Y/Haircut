@@ -2,7 +2,7 @@
 const express = require('express')
 const app = express()
 app.get('/', (req, res) => {
-  res.send('HEY!') //
+  res.send('HOY!') //
 	// res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
 	// var query = req.query
 	// // checkVersion(query);
