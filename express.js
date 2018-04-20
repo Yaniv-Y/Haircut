@@ -7,10 +7,11 @@ app.get('/', (req, res) => {
 	// checkVersion(query);
 	var db = new sqlite3.Database('BarbersDB');
 	var a = [];
-	db.all("SELECT bs.address, bs.gvanim, bs.menHaircut, bs.fen, bs.name, loc.latitude, loc.longitude\
+	var sql = "SELECT bs.address, bs.gvanim, bs.menHaircut, bs.fen, bs.name, loc.latitude, loc.longitude\
 		    FROM barbers as bs\
 		    JOIN locations as loc\
-		    ON bs.id = loc.barber", function(err, rows) {
+		    ON bs.id = loc.barber";//
+	db.all(sql, function(err, rows) {
 	  rows.forEach((row) => {
 	  	if (getDistance(row.latitude, query.latitude, row.longitude, query.longitude) / 1000 < 15)
 	  		a.push({address: row.address, gvanim: row.gvanim, menHaircut: row.menHaircut, fen: row.fen,
