@@ -1,62 +1,27 @@
-// var sqlite3 = require('sqlite3').verbose();
-
-// // var db = new sqlite3.Database('BarbersDB');
-// // db.serialize(function() {
-// //   db.run("CREATE TABLE barbers (id INTEGER PRIMARY KEY, placeId TEXT, gvanim INTEGER, menHaircut INTEGER, name INTEGER)");
- 
-// //   var intoBarbers = db.prepare("INSERT INTO barbers VALUES (?, ?, ?, ?, ?)");
-// //   intoBarbers.run(1, "placeId" + 1, 100 + 1 * 10, 1000, "Barber " + 1);
-// //   for (var i = 2; i <= 10; i++) {
-// //       intoBarbers.run(i, "placeId" + i, 100 + i * 10, i * 10, "Barber " + i);
-// //   }
-
-// //   intoBarbers.finalize();
-// //   });
-
-// var http = require('http');
-// http.createServer(function (req, res) {
-// 	res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-// 	var db = new sqlite3.Database('BarbersDB');
-// 	var a = [];
-// 	db.all("SELECT id, placeId, gvanim, menHaircut, name FROM barbers", function(err, rows) {
-// 	  rows.forEach((row) => {
-// 	  	a.push({id: row.id, placeId: row.placeId, gvanim: row.gvanim, menHaircut: row.menHaircut, name: row.name});
-// 	  });
-// 	  res.write(JSON.stringify(a));
-//       res.end();
-// 	});
-// 	db.close();
-// }).listen(8080, () => console.log("running on 8080"));
-
-
-
-
-
-
 var sqlite3 = require('sqlite3').verbose();
 
-var db = new sqlite3.Database('BarbersDB');
-db.serialize(function() {
-  db.run("CREATE TABLE barbers (id INTEGER PRIMARY KEY, address TEXT, gvanim INTEGER, menHaircut INTEGER, name INTEGER)");
-  db.run("CREATE TABLE locations (barber INTEGER REFERENCES barbers(id), latitude DOUBLE, longitude DOUBLE)");
+// var db = new sqlite3.Database('BarbersDB');
+// db.serialize(function() {
+//   db.run("CREATE TABLE barbers (id INTEGER PRIMARY KEY, address TEXT, gvanim INTEGER, menHaircut INTEGER, name INTEGER)");
+//   db.run("CREATE TABLE locations (barber INTEGER REFERENCES barbers(id), latitude DOUBLE, longitude DOUBLE)");
  
-  var intoBarbers = db.prepare("INSERT INTO barbers VALUES (?, ?, ?, ?, ?)");
-  var intoLocations = db.prepare("INSERT INTO locations VALUES (?, ?, ?)");
-      intoBarbers.run(1, "בן גוריון 24, פתח תקווה", 100 + 1 * 10, 50, "יוסף");
-      intoLocations.run(1, 32.0790541, 34.870013);
-      intoBarbers.run(2, "כתובת 2", 100 + 1 * 20, 70, "דני");
-      intoLocations.run(2, 32.0790531, 34.870023);
-  for (var i = 3; i <= 10; i++) {
-      intoBarbers.run(i, "address " + i, 100 + i * 10, i * 10, "Barber " + i);
-      intoLocations.run(i, i * 10, 10 + i * 10);
-  }
+//   var intoBarbers = db.prepare("INSERT INTO barbers VALUES (?, ?, ?, ?, ?)");
+//   var intoLocations = db.prepare("INSERT INTO locations VALUES (?, ?, ?)");
+//       intoBarbers.run(1, "בן גוריון 24, פתח תקווה", 100 + 1 * 10, 50, "יוסף");
+//       intoLocations.run(1, 32.0790541, 34.870013);
+//       intoBarbers.run(2, "כתובת 2", 100 + 1 * 20, 70, "דני");
+//       intoLocations.run(2, 32.0790531, 34.870023);
+//   for (var i = 3; i <= 10; i++) {
+//       intoBarbers.run(i, "address " + i, 100 + i * 10, i * 10, "Barber " + i);
+//       intoLocations.run(i, i * 10, 10 + i * 10);
+//   }
 
-  intoBarbers.finalize();
-  intoLocations.finalize();
+//   intoBarbers.finalize();
+//   intoLocations.finalize();
 
-  db.run("ALTER TABLE barbers ADD fen INTEGER");
-  db.run("UPDATE barbers SET fen = -1");
-  });
+//   db.run("ALTER TABLE barbers ADD fen INTEGER");
+//   db.run("UPDATE barbers SET fen = -1");
+//   });
 
 // var sqlite3 = require('sqlite3').verbose();
 var url = require('url');
