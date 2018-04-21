@@ -13,7 +13,7 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   	if (err) throw err;
   	myLoop(con);
-}
+});
 
 function f(con)
 {
