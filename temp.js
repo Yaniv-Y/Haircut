@@ -37,9 +37,7 @@ function myLoop (con) {           //  create a loop function
       f(con);          //  your code here
       i++;                     //  increment the counter
       if (i < 999999999) {            //  if the counter < 10, call the loop function
-         myLoop();             //  ..  again which will trigger another 
+         myLoop(con);             //  ..  again which will trigger another 
       }                        //  ..  setTimeout()
    }, 0)
 }
-
-myLoop();                      //  start the loop
