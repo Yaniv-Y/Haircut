@@ -24,8 +24,7 @@ con.connect(function(err) {
 	  	  console.log("Table created");
 	  	  result.forEach((row) => {
 		  	if (getDistance(row.latitude, query.latitude, row.longitude, query.longitude) / 1000 < 15)
-		  		a.push({address: row.address, gvanim: row.shades, menHaircut: row.menHaircut, fen: row.fen,
-		  				name: row.name, location: {latitude: row.latitude, longitude: row.longitude}});
+		  		a.push(row);
 		  });
 		  res.write(JSON.stringify(a));
 	      res.end();
